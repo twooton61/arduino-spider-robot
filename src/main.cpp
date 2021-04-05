@@ -162,6 +162,94 @@ void setup()
   low_base();
 }
 
+void step_forward_right()
+{
+  set_deg(BACK_RIGHT_KNEE, 180);
+  delay(200);
+  set_deg(BACK_RIGHT_HIP, 90);
+  delay(200);
+  set_deg(BACK_RIGHT_KNEE, 135);
+  delay(200);
+
+  set_deg(FRONT_RIGHT_KNEE, 0);
+  delay(200);
+  set_deg(FRONT_RIGHT_HIP, 180);
+  delay(200);
+  set_deg(FRONT_RIGHT_KNEE, 45);
+  delay(200);
+
+  set_deg(BACK_RIGHT_HIP, 45);
+  delay(200);
+  set_deg(FRONT_RIGHT_HIP, 135);
+  delay(200);
+}
+
+void step_back_right()
+{
+  set_deg(BACK_RIGHT_KNEE, 180);
+  delay(200);
+  set_deg(BACK_RIGHT_HIP, 0);
+  delay(200);
+  set_deg(BACK_RIGHT_KNEE, 135);
+  delay(200);
+
+  set_deg(FRONT_RIGHT_KNEE, 0);
+  delay(200);
+  set_deg(FRONT_RIGHT_HIP, 90);
+  delay(200);
+  set_deg(FRONT_RIGHT_KNEE, 45);
+  delay(200);
+
+  set_deg(BACK_RIGHT_HIP, 45);
+  delay(200);
+  set_deg(FRONT_RIGHT_HIP, 135);
+  delay(200);
+}
+
+void step_forward_left()
+{
+  set_deg(BACK_LEFT_KNEE, 0);
+  delay(200);
+  set_deg(BACK_LEFT_HIP, 90);
+  delay(200);
+  set_deg(BACK_LEFT_KNEE, 45);
+  delay(200);
+
+  set_deg(FRONT_LEFT_KNEE, 180);
+  delay(200);
+  set_deg(FRONT_LEFT_HIP, 0);
+  delay(200);
+  set_deg(FRONT_LEFT_KNEE, 135);
+  delay(200);
+
+  set_deg(BACK_LEFT_HIP, 135);
+  delay(200);
+  set_deg(FRONT_LEFT_HIP, 45);
+  delay(200);
+}
+
+void step_back_left()
+{
+  set_deg(BACK_LEFT_KNEE, 0);
+  delay(200);
+  set_deg(BACK_LEFT_HIP, 180);
+  delay(200);
+  set_deg(BACK_LEFT_KNEE, 45);
+  delay(200);
+
+  set_deg(FRONT_LEFT_KNEE, 180);
+  delay(200);
+  set_deg(FRONT_LEFT_HIP, 90);
+  delay(200);
+  set_deg(FRONT_LEFT_KNEE, 135);
+  delay(200);
+
+  set_deg(BACK_LEFT_HIP, 135);
+  delay(200);
+  set_deg(FRONT_LEFT_HIP, 45);
+  delay(200);
+}
+
 void loop()
 {
   const int latest_millies =  millis();
@@ -226,40 +314,31 @@ void loop()
       // front right
       case 0xFF30CF:
       Serial.println("1");
+
+      step_forward_left();
+
       break;
 
       case 0xFF18E7:
       Serial.println("2");
 
-
-      set_deg(BACK_RIGHT_KNEE, 180);
-      delay(200);
-      set_deg(BACK_RIGHT_HIP, 90);
-      delay(200);
-      set_deg(BACK_RIGHT_KNEE, 135);
-      delay(200);
-
-      set_deg(FRONT_RIGHT_KNEE, 0);
-      delay(200);
-      set_deg(FRONT_RIGHT_HIP, 180);
-      delay(200);
-      set_deg(FRONT_RIGHT_KNEE, 45);
-      delay(200);
-
-      set_deg(BACK_RIGHT_HIP, 45);
-      delay(200);
-      set_deg(FRONT_RIGHT_HIP, 135);
-      delay(200);
+      step_forward_right();
+      step_forward_left();
 
       break;
 
       case 0xFF7A85:
       Serial.println("3");
 
+      step_forward_right();
+
       break;
 
       case 0xFF10EF:
       Serial.println("4");
+
+      step_back_left();
+      step_forward_right();
       break;
 
       case 16726215:
@@ -268,6 +347,8 @@ void loop()
 
       case 0xFF5AA5:
       Serial.println("6");
+      step_back_right();
+      step_forward_left();
       break;
 
       case 0xFF42BD:
